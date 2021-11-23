@@ -12,7 +12,8 @@ gym: 0.7.3
 
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 np.random.seed(1)
 tf.set_random_seed(1)
@@ -153,6 +154,7 @@ class DeepQNetwork:
 
     def learn(self):
         # check to replace target parameters
+        print("training")
         if self.learn_step_counter % self.replace_target_iter == 0:
             self.sess.run(self.replace_target_op)
             print('\ntarget_params_replaced\n')
